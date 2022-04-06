@@ -15,6 +15,7 @@
 \newtheorem{problem}{Problem}[section]
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}{Proposition}[section]
 \newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
 
 
@@ -45,6 +46,98 @@
 This is my notes based on \textit{Theoretical Numerical Analysis: A Functional Analysis Framework, Kendall Atkinson, Weimin Hall}. 
 \section{Linear Space}
 \subsection{Algebraic Structure of Linear Space}
+\begin{definition}
+Let $V$ be a set of objects, to be called vectors, $\mathbb{K}$ be a set of scalers, either $\mathbb{R}$ or $\mathbb{C}$. Assume there are two operations: 1. (addition): $(u,v) \to u+v \in V$, 2. (Multiplication) $(\alpha,v) \to \alpha v \in V$, $u,v \in V, \alpha \in \mathbb{K}$, satisfying below rules:
+\begin{enumerate}
+	\item u+v=v+u (commutative law)
+	\item (u+v)+w=u+(v+w), (associative law)
+	\item $\exists 0 \in V, s.t. 0+v=v$. (Existence of the zero element)
+	\item $\forall v \in V, \exists -v \in V, s.t. v+(-v)=0$. (Existence of negative elements)
+	\item $1v=v$.
+	\item $\alpha(\beta v)=(\alpha \beta)v$. (associative law for scalar multiplication)
+	\item $\alpha(u+v)=\alpha u+\alpha v$. (distributive law).
+\end{enumerate}	
+\end{definition}
+
+
+\begin{definition}[Subspace]
+$\forall u,v \in W, \alpha \in \mathbb{K}, s.t. u+v \in W, \alpha v \in W$. $W$ is called subspace of $V$.
+\end{definition}
+
+This means subspace is closed under addition and multiplication of $V$.
+
+\begin{definition}[Span]
+The  span is defined to be the set of all linear combinations.
+\begin{equation}
+span \{v_1,v_2,\ldots,v_n\}=\{\sum_{i=1}^{n}\alpha_iv_i | \alpha_i \in \mathbb{K}, 1\leq i \leq n\}
+\end{equation}
+\end{definition}
+
+
+\begin{definition}[Linear function]
+
+Let $L: V \to W$. We say $L$ is a linear function if: (a)$\forall u,v \in V, L(u+v)=L(u)+L(v)$; (b) $\forall v\in V, \forall 
+\alpha \in \mathbb{K}, L(\alpha v)=\alpha L(v)$
+\end{definition}
+
+
+
+\begin{definition}[Isomorphic]
+Two linear spaces $U, V$ are said to be isomorphic, if there is  a linear bijective (one to one, onto) function $l:U \to V$.
+\end{definition}
+
+Many properties of linear space $U$ can be shared with $V$ if isomorphic holds.
+
+
+\begin{definition}[Cartesian product]
+
+Let $U, V$ to be two linear spaces. The Cartesian product of the spaces, $W=U\times V$ is defined by $W=\{w=(u,v) | u\in U, v\in V\}$.
+\end{definition}
+
+Cartesian product is closed under componentwise addition and scalr multiplication.
+
+\begin{lemma}[Real plane]
+The real plane can be viewed as the Cartesian product of two real lines: $R^2=R\times R$. In general, $R^d=\underbrace{R\times R\ldots \times R }_{d \ times}$
+\end{lemma}
+
+In next section, we will introduce spaces from topolotical structure, before doing that, we need to define some basic concepts about the measure on the magnitude of the difference between the numerical solution and the exact solution. This measuere is norm.
 \subsection{Topological Structure of Linear Space}
+
+\subsubsection{Normed spaces}
+\begin{definition}[Norm]
+Given a linear space $V$, a norm $|| \cdot ||$ is a function from $V \to R$ with the following properties.
+\begin{enumerate}
+	\item $||v|| \geq 0, \forall v\in V$, and $||v||=0 \iff v=0$ (Non-negative)
+	\item $||\alpha v||=|\alpha|||v||,\forall v\in V, \alpha \in \mathbb{K}$ (Positive homogenous)
+	\item $||u+v|| \leq ||u||+||v||, \forall u, v \in V$ (triangle inequality)
+\end{enumerate}
+\end{definition}
+
+
+\begin{definition}[Open and closed ball]
+Let $(V, ||\cdot||)$ be a normed space. Given $v_0 \in V, r>0$, open set is defined as $B(v_0,r)=\{v \in V | ||v-v_0||<r \}$, and closed set is defined as $\overline{B}(v_0,r)=\{v \in V | ||v-v_0||\leq r\}$.
+\end{definition}
+
+If $r=1, v_0=0$, we have unit ball.
+
+\begin{definition}[Convergence]
+Let $V$ be a normed space with norm $||\cdot||$. A sequence $\{u_n\} \subset V$ if 
+\begin{equation}
+\lim_{n \to \infty} ||u_n-u||=0
+\end{equation}
+\end{definition}
+Any sequence can have at most one limit.
+
+\begin{definition}[Continuous]
+A function $f:V\to R$ is said to be continuous at $u\in V$ if for any sequence $\{u_n\}$ with $u_n \to u$, we have $f(u_n) \to f(u)$ as $n \to \infty$. 
+\end{definition}
+
+The function $f$ is said to be continuous on $V$ if it is continuous at every $u\in V$.
+
+
+\begin{proposition}[Norm is continuous]
+The norm function $||\cdot||$ is continuous.
+\end{proposition}
+
 
 \end{document}

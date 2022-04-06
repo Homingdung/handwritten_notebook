@@ -1,0 +1,98 @@
+\documentclass{article}
+%
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,hyperref}
+%
+\newcommand{\R}{\mathbf{R}}  
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Q}{\mathbf{Q}}
+%
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{question}{Question}[section]
+\newtheorem{problem}{Problem}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+%
+%
+%
+\begin{document}
+
+% ------------------------------------------ %
+%                 START HERE                  %
+% ------------------------------------------ %
+
+\title{Krylov Subspace Method} % Replace with appropriate title
+\author{Mingdong He\\The University of Nottingham} 
+
+\maketitle
+
+\tableofcontents
+% -----------------------------------------------------
+% The following two environments (theorem, proof) are
+% where you will enter the statement and proof of your
+% first problem for this assignment.
+%
+% In the theorem environment, you can replace the word
+% "theorem" in the \begin and \end commands with
+% "exercise", "problem", "lemma", etc., depending on
+% what you are submitting. 
+% -----------------------------------------------------
+\section{Introduction}
+\begin{definition}[Krylov Subspace]
+Let $A \in R^{n\times n}$ and $b \in R^n$. Then the Krylov subspace $K_j(A,b)$ is defined as:
+\begin{equation}
+K_j(A,b)=span\{b,Ab,A^2b,...,A^{j-1}b\} \in R^n
+\end{equation}
+\end{definition}
+We could prove that
+\begin{equation}
+K_1(A,b) \subseteq K_2(A,b) \subseteq \ldots \subseteq K_j(A,b)
+\end{equation}
+
+\begin{definition}[Krylov Matrix]
+Krylov Matrix is defined by, $K_j(A,b)=[b,Ab,\ldots,A^{j-1}b]$. 
+\end{definition}
+
+Each column can be computed iteratively, e.g. $Ab, A^2b=A(Ab),A^3b=A(A(Ab))$.
+
+\section{Motivation}
+\begin{theorem}[Cayley-Hamilton Theorem]
+A is a $n\times n$ matrix, the characteristic polynomial has the form $p(\lambda)=\det(\lambda I_n-A)$, then p(A)=0.
+\end{theorem}
+
+Consider a matrix $A=\begin{bmatrix}0 & 2 & 1 \\ -1 & 3 & 1\\ -2 & 2 & 3\end{bmatrix}$, the characteristic polynomial of $A$ is $p(\lambda)=\lambda^3-6\lambda^2+11\lambda-6$. By Caley-Hamilton theorem, we have 
+\begin{equation}
+A^3-6A^2+11A-6I=0_{3\times3}
+\end{equation}
+or equivalently
+\begin{equation}
+A^{-1}=\frac{1}{6}(A^2-6A+11I)
+\end{equation}
+
+If we have a system $Ax=b$, where $A$ is an invertibel matrix, then
+
+\begin{align}
+x&=A^{-1}b\\
+&=\frac{1}{6}(A^2-6A+11I)b\\
+&=\frac{1}{6}(A^2b-6Ab+11b)\\
+&=L(A^2b,Ab,b)\\
+&=K_3(A,b)
+\end{align}
+
+
+\section{Conjugate Gradient Iteration}
+\begin{theorem}
+Let the conjugate gradient iteration be applied to symetric positive definite matrix problem $Ax=b$. As long as the iteration has not yet converged ($r_n \neq 0$), the algorithm proceeds without division by zero, and we have the following identities of subspaces:
+\begin{align}
+K_n&=<x_1,x_2,\ldots,x_n>=<p_0,p_1,\ldots,p_{n-1}>\\
+&=<r_0,r_1,\ldots,r_{n-1}>=<b,Ab,\ldots,A^{n-1}b>
+\end{align}
+Moreover, residuals are orthogonal: $r_b^Tr_j=0$, $(j<n)$
+and the search directions are A-conjugate: $p_n^TAP_j=0$,$(j<n)$.
+\end{theorem}
+
+\end{document}

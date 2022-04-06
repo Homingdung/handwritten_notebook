@@ -1,0 +1,200 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,hyperref}
+
+\newcommand{\R}{\mathbf{R}}  
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Q}{\mathbf{Q}}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{question}{Question}[section]
+\newtheorem{problem}{Problem}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+
+
+\begin{document}
+
+% ------------------------------------------ %
+%                 START HERE                  %
+% ------------------------------------------ %
+
+\title{Mathematical Method} % Replace with appropriate title
+\author{Mingdong He\\The University of Nottingham} 
+
+\maketitle
+
+\tableofcontents
+% -----------------------------------------------------
+% The following two environments (theorem, proof) are
+% where you will enter the statement and proof of your
+% first problem for this assignment.
+%
+% In the theorem environment, you can replace the word
+% "theorem" in the \begin and \end commands with
+% "exercise", "problem", "lemma", etc., depending on
+% what you are submitting. 
+% -----------------------------------------------------
+\section{Introduction}
+This is my reading notes based on \textit{Mathematical Methods,  University of Cambridge Part IB Mathematical Tripos,  David Skinner}.  This notes is largely imcomplete one, I only write down some essential parts based on my own learning path.
+
+\section{Fourier Series}.
+\begin{definition}[Innner product]
+Inner product is defined as a mapping $(,):V \times V \to F$ that obeys:
+\begin{enumerate}
+	\item $(u,v)=(v,u)*$ (Conjugate symmetry)
+	\item $(u,\lambda v)=\lambda(u,v)$ (linearity)
+	\item $(u,v+w)=(u,v)+(u,w)$ (additivity)
+	\item $(u,u) \geq 0, \forall u \in V$, and with equality $\iff u=0$
+\end{enumerate}
+\end{definition}
+
+If $F=\mathbb{C}$, the map is called sesquilinear.
+
+
+\subsection{Motivation}
+If we're given an orthonormal basis, we can use the inner product to explicitly decompose a general into. this basis. 
+
+For any element $u\in V$,  it can be uniquely written as 
+\begin{equation}
+u=\sum_{i=1}^n \lambda_iv_i
+\end{equation}
+
+we can use inner product to find the coefficient $\lambda_i$. Please note that $(v_i,v_j)=\delta_{ij}$.
+\begin{equation}
+(v_j,u)=(v_j,\sum_{i=1}^n\lambda_i v_i)=\sum_{i=1}^n (v_i,\lambda_i v_i)=\sum_{i=1}^n \lambda_i(v_j,v_i)=\lambda_j
+\end{equation}
+
+Thus, we find that $\lambda_i=(v_i,u)$, for real vectors, $\lambda_j$ is just the projection of $u$ onto $v_j$.
+
+\begin{definition}[Inner product for complex valued function]
+Consider a function $f: \Omega \to \mathbb{C}$. The inner product is defined as:
+\begin{equation}
+(f,g)=\int_{\Omega}f(x)^*g(x)d\mu
+\end{equation}
+\end{definition}
+This is an generalization of the inner product between two finite dimensional vectors. 
+
+If $\Omega = [a,b]$, then $(f,g)=\int_a^b f(x)^*g(x)dx$, with measure $dx$
+If $\Omega$ is disc $D_2$, then $(f,g)=\int_{r=0}^1\int_{\theta=0}^{2\pi}f(r,\theta)^*g(r,\theta)rdrd\theta$, with. measure $d\mu=rdrd\theta$.
+
+Let's applied above results to construct fourier series.
+
+Consider inner product:
+\begin{equation}
+(e^{im\theta},e^{in\theta})=\int_{\pi}^{\pi}e^{-im\theta}e^{in\theta}d\theta=2\pi \delta_{m,n}
+\end{equation}
+
+this function $e^{in\theta}$ can be used as orthonormal basis after some scaling.
+
+Fourier claimed that 
+\begin{equation}
+f(\theta)\stackrel{?}{=}\sum_{n \in \mathbb{Z}}\hat{f_n}e^{in\theta}
+\end{equation}
+
+
+Since our basis is orthonormal, we can use inner product to get the cofficients $\hat{f_n}$.
+\begin{equation}
+\hat{f_n}=\frac{1}{2\pi}(e^{in\theta},f)=\frac{1}{2\pi}\int_{-\pi}^{\pi}e^{-in\theta}f(\theta)d\theta
+\end{equation}
+
+
+Let's rewrite the function:
+
+\begin{align}
+f&=\sum_{n\in \mathbb{Z}}\hat{f_n}e^{in\theta}\\
+&=\hat{f_0}+\sum_{n=1}^{\infty}(\hat{f_n}e^{in\theta}+\hat{f}_{-n}e^{-in\theta})\\
+&=\hat{f_0}+\sum_{n=1}^{\infty}(\hat{f_n}e^{in\theta}+\hat{f}_{n}^{*}e^{-in\theta})\\
+&=\hat{f_0}+\sum_{n=1}^{\infty}a_n\cos{n\theta}+b_n\sin{n\theta}
+\end{align}
+
+In the final line, we set $\hat{f_n}=(a_n-ib_n)/2$, then we get
+\begin{equation}
+a=2 \Re \hat{f_n},b=-2\Im \hat{f_n}
+\end{equation}
+\begin{equation}
+a=\frac{1}{\pi}\int_{-\pi}^{\pi}\cos{n\theta}f(\theta)d\theta, b=\frac{1}{\pi}\int_{-\pi}^{\pi}\sin{n\theta}f(\theta)d\theta
+\end{equation}
+
+
+\subsection{Some results}
+
+\begin{definition}
+The finite sum is defined as 
+\begin{equation}
+S_nf=\sum_{k=-n}^{n}\hat{f_k}e^{in\theta}
+\end{equation}
+\end{definition}
+
+
+\begin{theorem}[Parseval's identity]
+\begin{equation}
+(f,f)=2\pi \sum_{n\in \mathbb{Z}} |\hat{f_n}|^2
+\end{equation}
+\end{theorem}
+
+Parseval's indentity can be view as an infinite dimensional version of Phythagoras'theorem: the norm squared $f$ is equal to the sum of the (mod)-squares of its coefficients in the (Fourier) basis of orthogonal functions. If we view the Fourier series as a map from a function to a sequence, Parseval's identity tells us this map is an isometry, which means it preserves lengths.
+
+\section{Sturm-Liouville Theory}
+\subsection{Matices foundation: Self-adjoint matrices}
+\begin{definition}[Linear Map]
+Let $V$ and $W$ be finite dimensional vector spaces (over complex numbers), with $\dim{V}=n,\dim{W}=m$, a linear map is defined by $M:V\to M$
+\end{definition}
+
+We can. represent the map $M$ in terms of an $m\times n $ matrix $M$, with components:
+\begin{equation}
+M_{ai}=(w_a,Mv_i), a=1,\ldots,m, i=1,\ldots,n
+\end{equation}
+
+\begin{definition}[Hermitian conjugate]
+Given a matirx $M$, its Hermitian conjugate $M^{\dag}$ is defined to be the complex conjugate of the transpose matrix, $M^{\dag}=(M^{T})^{*}$, where the complex conjugation acts on each entry of $M^{T}$.
+\end{definition}
+
+A matrix is said to be Hermitian or self-adjoint if $M^{\dag}=M$. This is also another neaty way of this definition. since for two vectors we have, $(u,v)=u^{\dag} \cdot v$, (if both vector are real, this is same as inner product as usual, also, $(Bu)^{\dag}=u^{\dag}B^{\dag}$, we have the definition that: matrix $B$ is the adjoint of a matrix $A$ $\iff$ $(Bu,v)=(u,Av)$. 
+
+There some important properties below.
+
+\begin{enumerate}
+	\item Since $\lambda_i(v_i,v_i)=(v_i,Mv_i)=(Mv_i,v_i)=\lambda_i^{*}(v_i,v_i)$, the eigenvalues of self-adjoint matrix are always real (because $\lambda_i=\lambda_i^{*}$).
+	\item We have $\lambda_i(v_j,v_i)=(v_j,Mv_i)=(Mv_j,v_i)=\lambda_i(v_i,v_i)$, then $(\lambda_i-\lambda_j)(v_j,v_i)=0$, the eigenvectors corresponding to distinct eigenvalues are orthogonal w.r.t. the inner product.
+\end{enumerate}
+
+\subsection{Solving linear system}
+
+A self-adjoint matrix $M$ is non-singular $\iff$ all its eigenvalues are non-zero. In this case, we can solve the linear equation $\mathbf{Mu}=\mathbf{f}$. The solution is $\mathbf{u}=\mathbf{M^{-1}f}$. 
+
+Suppose $\{v_1,v_2,\ldots,v_n\}$ is an orthonormal basis of eigenvectors of $\mathbf{M}$. Then we can write:
+\begin{align}
+\mathbf{f}=\sum_{i=1}^{n}f_i\mathbf{v_i},\\
+\mathbf{u}=\sum_{i=1}^{n}u_i\mathbf{v_i}
+\end{align}
+
+where $f_i=(\mathbf{v_i},\mathbf{f})$ (see previous inner product). In order to solve $\mathbf{u}$, we need to find the coefficients $u_i$ in the $\{v_i\}$ basis.
+
+
+By linearity:
+\begin{equation}
+\mathbf{Mu}=\sum_{i=1}^{n}u_i \mathbf{Mv_i}=\sum_{i=1}^{n}u_i\lambda_i\mathbf{v_i}=\mathbf{f}=\sum_{i=1}^n f_i\mathbf{v_i}
+\end{equation}
+
+
+Take the inner product of this equation with $\mathbf{v_j}$ gives
+
+\begin{equation}
+\sum_{i=1}^n u_i\lambda_i(v_j,v_i)=u_j\lambda_j=\sum_{i=1}^nf_i(v_j,v_i)=\sum_{i=1}^n f_i\delta_{ij}=f_j
+\end{equation}
+
+Thus,
+\begin{equation}
+\mathbf{u}=\sum_{i=1}^n\frac{f_i}{\lambda_i}\mathbf{v_i}
+\end{equation}
+
+
+If $\mathbf{M}$ is singular then either $\mathbf{Mu=f}$ has no solution or else has a non-unique solution.
+\end{document}
