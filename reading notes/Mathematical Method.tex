@@ -197,4 +197,172 @@ Thus,
 
 
 If $\mathbf{M}$ is singular then either $\mathbf{Mu=f}$ has no solution or else has a non-unique solution.
+
+
+\subsection{Differential Operator}
+
+This section is highly related to the previous discussion about self-adjoint matrices.
+
+\begin{definition}[Linear Operator]
+\begin{equation}
+L=A_p(x)\frac{d^p}{dx^p}+A_{p-1}\frac{d^{p-1}}{dx^{p-1}} + \ldots + A_1(x)\frac{d}{dx}+A_0(x)
+\end{equation}
+\end{definition}
+
+This is a linear map between spaces of functions beacause for two function $y_{1,2}(x)$ and constants $c_{1,2}$, we have $L(c_1y_1+c_2y_2)=c_1Ly_1+c_2Ly_2$.
+
+We will be interested in second order linear differential operators
+\begin{equation}
+L=P(x)\frac{d^2}{dx^2}+R(x)\frac{d}{dx}-Q(x)
+\end{equation}
+
+The homogenous equation $Ly(x)=0$ has precisely two non-trivial linearly independent solutions, say $y=y_1(x),y=y_2(x)$, and the general solution is $y(x)=c_1y_1(x)+c_2y_2(x)$, which is called complementary function. For inhomogenous equation $Ly(x)=f$, we seek any single solution $y(x)=y_p(x)$, which is called partial integral, and the final general solution is the a linear combination 
+\begin{equation}
+y(x)=c_py_p(x)+c_1y_1(x)+c_2y_2(x)
+\end{equation}
+Sturm-Liouville theory provides a more systematic approach, analogous to solving the matrix equation $\mathbf{Mu=f}$.
+
+
+\subsection{Self-adjoint differential operators}
+The second order differential operator considered by Sturm and Liouville take the form
+\begin{equation}
+Ly=\frac{d}{dx}\left(p(x)\frac{dy}{dx}\right)-q(x)y
+\end{equation}
+
+Provided $P(x)\neq 0$, divided through by $P(x)$ to obtain
+\begin{equation}
+\frac{d^2}{dx^2}+\frac{R(x)}{P(x)}\frac{d}{dx}-\frac{Q(x)}{P(x)}=e^{-\int_0^x R(t)/P(t)dt}\frac{d}{dx}\left(e^{\int_0^x R(t)/P(t)dt}\frac{d}{dx}\right)-\frac{Q(x)}{P(x)}
+\end{equation}
+
+with integrating factor $e^{\int_0^x R(t)/P(t)dt}$. 
+
+
+The beautiful feature of Sturm-Liouville operators is that they are self-adjoint w.r.t inner product 
+\begin{equation}
+(f,g)=\int_a^bf(x)^{*}g(x)dx
+\end{equation}
+
+
+provided the functions on which they act obey appropriate boundary conditions. Let' s illustrate this fact.
+
+Recall the neaty definition: matrx $B$ is the adjoint of a matrix $A$ $\iff$ $(Bu,v)=(u,Av)$. Thus, let take inner product $(Lf,g)$
+
+\begin{align}
+(Lf,g)&=\int_a^b\left[\frac{d}{dx}(p(x)\frac{df^*}{dx})-q(x)f^*(x)\right]g(x)dx\\
+	  &=\left[p\frac{df^*}{dx}g\right]_a^b-\int_a^b p(x)\frac{df^*}{dx}\frac{dg}{dx}-q(x)f(x)^*g(x)dx\\
+	  &=\left[p\frac{df^*}{dx}g-pf^*\frac{dg}{dx}\right]_a^b+\int_a^bf(x)^*\left[\frac{d}{dx}\left(p(x)\frac{dg}{dx}\right)-q(x)g(x)\right]dx\\
+	  &=\underbrace{\left[p(x)\left(\frac{df^*}{dx}g-f^*\frac{dg}{dx}\right)\right]_a^b}_{boundary \ condition \ applied =0}+(f,Lg)
+\end{align}
+
+
+Exampls of such boundary conditions are to require that all our functions satisfy
+\begin{align}
+b_1f'(a)+b_2f(a)=0\\
+c_1f'(b)+c_2f(b)=0
+\end{align}
+
+
+There are some cases about this boundary conditions
+\begin{enumerate}
+	\item If the function $p(x)$ obeys $p(a)=p(b)$, then all our functions are periodic, so that $f(a)=f(b), f'(a)=f'(b)$
+	\item If $p(a)=p(b)=0$, the endpoints of the interval $[a,b]$ are singular points of the differential equation.
+\end{enumerate}
+
+This section need to be illustrated later.
+
+
+\subsection{Eigenfunctions and weight functions}
+
+
+
+\begin{definition}[Eigenfunction]
+A function $y(x)$ is said to be an eigenfunction of $L$ with eigenvalue $\lambda$ and weight $w(x)$ if
+\begin{equation}
+Ly(x)=\lambda w(x)y(x)
+\end{equation}
+\end{definition}
+
+
+\begin{definition}[Inner product with weight]
+\begin{equation}
+(f,g)_{\omega}=\int_a^b f(x)^*g(x)\omega(x)dx
+\end{equation}
+\end{definition}
+
+Since omega(x) is real, so $(f,g)_\omega=(f,\omega g)=(\omega f,g)$
+
+
+\begin{definition}[Eigenvalues of SL operator are always real]
+If $Lf=\lambda \omega f$, then 
+\begin{equation}
+\lambda (f,f)_\omega =(f,\lambda \omega f)=(f,Lf)=(Lf,f)=\lambda^*(f,f)_\omega 
+\end{equation}
+\end{definition}
+
+\begin{theorem}
+Eigenfunctions $f_1,f_2$ with distinct eigenvalues, but the same weight function, are orthogonal w.r.t the inner product with weight $\omega$.
+\end{theorem}
+\begin{proof}
+Since:
+\begin{equation}
+\lambda_i(f_j,f_i)_\omega=(f_j,Lf_i)=(Lf_j,f_i)=\lambda_j(f_j,f_i)_\omega
+\end{equation}
+so that if $\lambda_i \neq \lambda_j$,then:
+\begin{equation}
+(f_j,f_i)_\omega=\int_a^b f_j(x)^*f_i(x)\omega(x)dx=0
+\end{equation}
+\end{proof}
+
+
+Application of this theorem is that: given a self-adjoint operator $L$, we can form an orthonormal set $\{Y_1(x),Y_2(x),\ldots \}$ of its eigenfunctions by setting:
+
+\begin{equation}
+Y_n(x)=y_n(x)/\sqrt{\int_a^b |y_n|^2\omega dx}
+\end{equation}
+
+Finally, making particular choice of boundary conditions, any function $f(x)$ in $[a,b]$ that obeys the chosen boundary conditions may be expanded as:
+\begin{equation}
+f(x)=\sum_{n=1}^\infty f_n Y_n(x), \ where \ f_n=(Y_n,f)_\omega =\int_a^b Y_n^*(x)f(x)\omega (x)dx
+\end{equation}
+
+Let's take a look at some example:
+Taking the domain $[-L,L]$ and impose the homogeneous boundary conditions that all our functions are periodic i.e. $f(-L)=f(L),f'(-L)=f'(L)$. Choosing $p(x)=1$ and $q(x)=0$, thus SL operator is
+\begin{equation}
+L=\frac{d^2}{dx^2}
+\end{equation}
+
+Choosing weight function to be $1$:
+The eigenfunction equation becomes:
+\begin{equation}
+Ly(x)=-\lambda y(x)
+\end{equation}
+
+If $\lambda <0$, the only solution that obeys the periodic boundary conditions is the trivial case $y(x)=0$; If $\lambda \geq 0$, then a basis of solution is given by
+
+\begin{equation}
+y_n(x)=\exp(i \frac{n \pi x}{L}), for \ \lambda_n=\left(\frac{n\pi}{L}\right)^2
+\end{equation}
+
+For another example:
+\begin{equation}
+\frac{1}{2}H''-xH'=-\lambda H(x)
+\end{equation}
+
+subject to the condition that $H(x)$ behaves like a polynomial as $|x| \to \infty$. This equation is not yet in SL form, so we first compute the integrating factor:
+\begin{equation}
+\frac{d}{dx}\left(e^{-x^2}\frac{dH}{dx}\right)=-2\lambda e^{-x^2}H(x)
+\end{equation}
+
+
+This equation is known as Hermite's equation. The solution is,
+
+\begin{equation}
+H_n(x)=(-1)^ne^{x^2}\frac{d^n}{dx^n}e^{-x^2}
+\end{equation}
+
+Thus, $H_0(x)=1, H_1(x)=2x, H_2(x)=4x^2-2, H_3(x)=8x^3-12x$, which is known as Hermite polynomial with the following property:
+\begin{equation}
+(H_m,H_n)_{e^{-x^2}}=\int_{-\infty}^{\infty}H_m(x)H_n(x)e^{-x^2}dx=\delta_{m,n}2^n\sqrt{\pi}n!
+\end{equation}
+
 \end{document}
