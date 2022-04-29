@@ -365,4 +365,492 @@ Thus, $H_0(x)=1, H_1(x)=2x, H_2(x)=4x^2-2, H_3(x)=8x^3-12x$, which is known as H
 (H_m,H_n)_{e^{-x^2}}=\int_{-\infty}^{\infty}H_m(x)H_n(x)e^{-x^2}dx=\delta_{m,n}2^n\sqrt{\pi}n!
 \end{equation}
 
+\subsection{Inhomogeneous equations and Green's functions}
+
+We have discussed the problem of solving $\mathbf{Mu}=\mathbf{f}$, where $\mathbf{M}$ is a self-adjoint matrix.
+
+We now consider solving problem,
+\begin{equation}
+L \phi(x)=\omega (x)F(x)
+\end{equation}
+
+The idea is that the function $\phi(x), F(x)$ can be expanded in a complete set of eigenfunctions of $L$. So we suppose that the set $\{Y_1(x),Y_2(x),\ldots\}$ form a complete set of such eigenfunctions with 
+\begin{equation}
+LY_n(x)=\lambda_n\omega(x)Y_n(x), and \ (Y_m,Y_n)_\omega =\delta_{m,n}
+\end{equation}
+
+and we expand:
+
+\begin{equation}
+\phi(x)=\sum_{n=1}^{\infty} Y_n(x), \ F(x)=\sum_{n=1}^{\infty} F_n Y_n(x)
+\end{equation}
+
+In matrix case, we assume that the function $F(x)$ is known, as well as the coefficient $F_n(x)=(Y_n,F(x))$. Since $L$ is a linear operator, we have,
+\begin{equation}
+LHS=L\phi=\sum_{n=1}^{\infty}\phi_nLY_n=\omega \sum_{n=1}^{\infty}\phi_n\lambda_nY_n
+\end{equation}
+\begin{equation}
+RHS=\omega F=\omega \sum_{n=1}^{\infty} F_n Y_n
+\end{equation}
+
+Thus, if we take the inner product with $Y_m$, by orthogonality, we can get $\phi_m\lambda_m=F_m$.
+So the solution (particular integral) is,
+\begin{equation}
+\phi_p(x)=\sum_{n=1}^{\infty} \frac{F_n}{\lambda_n}Y_n(x)
+\end{equation}
+
+The complementary function $\phi_c(x)$ satisfying $L\phi_c(x)=0$.
+
+Let's study the solution in more details.
+
+\begin{align}
+\phi_p(x)&=\sum_{n=1}^{\infty} \frac{(Y_n,F)_\omega}{\lambda_n}Y_n(x)\\
+		 &=\sum_{n=1}^{\infty}\frac{1}{\lambda_n}\int_{a}^bY_n(x)Y_n^*(t)F(t)\omega (t)dt\\
+		 &=\int_a^b \sum_{n=1}^{\infty} \frac{Y_n(x)Y_n^*(t)}{\lambda_n}\omega (t)F(t)dt\\
+		 &=\int_a^b G(x,t)f(t)dt
+\end{align}
+
+where $G(x,t)=\sum_{n=1}^{\infty}\frac{Y_n(x)Y_n^*(x)}{\lambda_n}, f(t)=\omega(t)F(t), (x,t)\in [a,b]\times [a,b]$.
+
+Green function:
+\begin{enumerate}
+	\item depends on operator $L$ both through its eigenfunctions and through the boundary conditions we choose to ensure self-adjoint. 
+	\item do not depend on the forcing function $f$.
+\end{enumerate}
+
+For matrix case:
+\begin{equation}
+\mathbf{Mu=f} \implies \mathbf{u}=\mathbf{M^{-1}f}
+\end{equation}
+
+For this case:
+\begin{equation}
+Ly(x)=f \implies y(x)=\int_a^b G(x,t)f(t)dt
+\end{equation}
+
+Thus, green's function provides a formal inverse to the differential operator $L$
+
+\subsubsection{Parseval's identity II}
+Let $\{Y_1(x),Y_2(x),\ldots\}$ be a complete set of functions that are orthonormal with respect to some weight function $\omega(x)$, so that $(Y_m,Y_n)=\delta_{m,n}$. Then expanding,
+\begin{equation}
+f(x)=\sum_{n=1}^{\infty}f_nY_n(x), with \ f_n=(Y_n,f)_\omega 
+\end{equation}
+
+
+we have,
+\begin{align}
+(f,f)_\omega &=\int_a^b \sum_{m=1}^{\infty} f^*_mY^*(x) \sum_{n=1}^{\infty} f_mY(x) \omega(x)dx\\
+             &=\sum_{n,m} f_m^*f_n(Y_m,Y_n)_\omega\\
+             &=\sum_{n=1}^{\infty}|f_n|^2
+\end{align}
+This is the Parseval's identity in for the case of the inner product with weight $\omega$.
+
+Recall that the Parseval's indentity:
+\begin{equation}
+(f,f)=2\pi \sum_{n\in \mathbb{Z}} |\hat{f}_n|^2
+\end{equation}
+
+
+Parseval's identity can be viewed as an infinite dimensional version of Pythagoras's theorem: it says that the norm squared of $f$ is equal to the sum of the (mod-) squares of its coefficients in the (Fourier) basis of orthogonal functions.
+
+\subsubsection{Least square approximation}
+
+We have already introduced the matrix and algebraic form of solving equations. In real world, our computers have finite power and memory, and we typically don't have the resources to handle a very large number of eigenfunctions. So in practical applications, it's important to know how accurately we can represent a function by expanding it in just a limited \textbf{incomplete} set of eigenfunctions. Thus, considering a finite sum:
+\begin{equation}
+g(x)=\sum_{i=1}^{n} c_i Y_i(x)
+\end{equation}
+
+One notation of what we mean by `closely' is the distance, which should be minimized.
+
+\begin{equation}
+(f-g,f-g)_\omega=\int_a^b |f-g|^2\omega(x)dx
+\end{equation}
+
+
+and 
+
+\begin{align}
+\frac{\partial}{\partial c_k}(f-g,f-g)_\omega&=\frac{\partial}{\partial c_k}[(f,f)-(g,f)-(f,g)+(g,g)]\\
+											 &= -\frac{\partial}{\partial c_k}(\sum_{i=1}^nc_i^*f_i+f_i^*-|c_i|^2)\\
+											 &=-f^*_k+c_k^*
+\end{align}
+
+
+and likewise,
+
+\begin{equation}
+\frac{\partial}{\partial c_k^*}(f-g,f-g)_\omega=-f_k+c_k
+\end{equation}
+
+
+These derivatives vanish iff $c_k=f_k$. Thus, the best approximation is to choose the coefficients $c_k=(Y_k,f)_\omega$ exactly as its true expansion.
+
+\section{Laplace's Equation}
+
+Let's introduce Laplace's eqution:
+\begin{equation}
+\nabla ^2 \psi = \sum_{i=1}^d \frac{\partial ^2}{\partial x_i ^2}\psi=0
+\end{equation}
+
+\begin{definition}[Dirichlet boundary condition]
+Consider a bounded domain $\Omega \subset \mathbb{R}^d$ and a function $f: \partial \Omega \to \mathbb{R}$
+\begin{equation}
+\psi(\mathbf{x})=f(\mathbf{x}) \ \textup{at each point} \  \mathbf{x}\in \Omega
+\end{equation}
+\end{definition}
+
+\begin{theorem}
+In the case of Dirichlet boundary conditions, if we can find a solution, then it must be unique.
+\end{theorem}
+\begin{proof}
+Suppose there are two solutions $\psi_1, \psi_2$, both obey Laplace's equations in $\Omega$ and $\psi_1|_{\partial \Omega}=\psi_2|_{\partial \Omega}=f$, then setting $\delta \psi=\psi_1-\psi_2$ and integrating by parts we have,
+\begin{equation}
+0=\int_{\Omega} \delta \psi \nabla^2\delta\psi dV=\underbrace{\int_{\partial \Omega} \delta \psi \mathbf{n} \cdot(\nabla \delta \psi)dS}_{\delta \psi |_{\partial \Omega}=0}-\int_{\Omega}(\nabla \delta \psi) \cdot (\nabla \delta \psi) dV
+\end{equation}
+
+The only way that the integral can be zero is for $\nabla \delta \psi=0$ throughout $\Omega$. Hence $\delta \psi=const$ and need to vanishes on the boundary, so $\delta \psi =0$. Therefore, $\psi_1=\psi_2$ everywhere and our solution is unique.  
+\end{proof}
+
+\begin{definition}[Neumann boundary condition]
+Consider a bounded domain $\Omega \subset \mathbb{R}^d$ and a function $g: \partial \Omega \to \mathbb{R}$
+\begin{equation}
+\mathbf{n} \cdot \nabla \psi(\mathbf{x})=g(\mathbf{x}) \ \textup{at each point} \ \mathbf{x} \in \partial \Omega
+\end{equation}
+\end{definition}
+where $\mathbf{n}$ is the outward normal. The argument of uniqueness is similar that $\delta \psi=const$, but now the conditions no longer force this constant to vanish. Thus, Neumann boundary conditions determines our solution only up to the addition of a constant.
+
+\subsection{Laplace's equation on a disc}
+One powerful method for solving Laplace's equation is based on the fact that we can think of $\mathbb{R}^2$ as the complex plane $\mathbb{C}$. For $(x,y)\in \mathbb{R}^2$, we introduce $z=x=iy,\bar{z}=x-iy$. The solution of this is 
+\begin{equation}
+\psi(x,y)=\underbrace{\phi(z)}_{holomorphic, \frac{\partial \phi}{\partial \bar{z}}=0}+\underbrace{\chi(\bar{z})}_{antiholomorphic, \frac{\partial \chi}{\partial z}=0}
+\end{equation}
+\subsection{Separation of variables}
+Suppose $\Omega$ is the three dimensional region:
+\begin{equation}
+\Omega=\{(x,y,z)\in \mathbb{R}^3:0\leq x \leq a, 0 \leq y \leq b, z \geq 0\}
+\end{equation}
+Solving Laplace's equation $\nabla ^2\psi=0$, with the following Dirichtlet boundary conditions in $\Omega$:
+
+\begin{align}
+&\psi(0,y,z)=0,\psi(a,y,z)=0\\
+&\psi(x,0,z)=0, \psi(x,b,z)=0\\
+&\psi(x,y,0)=f(x,y),\psi(x,y,z)\to 0 \ as \ z\to \infty
+\end{align}
+
+Assuming the solution takes the form:
+\begin{equation}
+\psi(x,y)=X(x)Y(y)Z(z)
+\end{equation}
+After substitution, we will get three ODEs,
+\begin{equation}
+X''=-\lambda X, \ Y''=-\mu Y, \ Z''=(\lambda+\mu)Z 
+\end{equation}
+
+The solution is:
+\begin{equation}
+\psi(x,y,z)=A(\sin(\sqrt{\lambda}x)+B\cos(\sqrt{\lambda x}))(\sin(\sqrt{\mu}y)+C\cos(\mu y))(e^{-z\sqrt{\lambda+\mu}}+De^{+z\sqrt{\lambda+\mu}})
+\end{equation}
+
+Imposing bounary conditions:
+\begin{equation}
+\psi(x,y)_{n,m}(x,y,z)=\sin\left(\frac{n\pi x}{a}\right)\sin \left(\frac{m\pi y}{b}\right)\exp\left(-\pi z \sqrt{\frac{n^2}{a^2}+\frac{m^2}{b^2}}\right)
+\end{equation}
+
+The general solution is a linear combination:
+\begin{equation}
+\psi(x,y)=\sum_{n,m=1}^{\infty} A_{n,m}\sin\left(\frac{n\pi x}{a}\right)\sin \left(\frac{m\pi y}{b}\right)\exp\left(-\pi z \sqrt{\frac{n^2}{a^2}+\frac{m^2}{b^2}}\right)
+\end{equation}
+
+For inhomogenous solution $f(x,y)$, it must satisfy,
+\begin{equation}
+f(x,y)=\sum_{n,m=1}^{\infty} A_{n,m}\sin\left(\frac{n\pi x}{a}\right)\sin \left(\frac{m\pi y}{b}\right)
+\end{equation}
+
+As usual, the coefficient could be obtained by inner prodct,
+
+\begin{align}
+A_{n,m}&=\left(\sin\left(\frac{n\pi x}{a}\right)\sin \left(\frac{m\pi y}{b}\right), f(x,y)\right)\\
+	   &=\frac{4}{ab}\int_{[0,a]\times [0,b]}\sin\left(\frac{n\pi x}{a}\right)\sin \left(\frac{m\pi y}{b}\right) dx f(x,y)dxdy
+\end{align}
+
+where we use the orthogonality to adjust the factor,
+\begin{equation}
+\int_0^a\sin\left(\frac{n\pi x}{a}\right)\sin \left(\frac{m\pi y}{b}\right)dx=\frac{a}{2}\delta_{m,n}
+\end{equation}
+Summary of method of separation of variables:
+\begin{enumerate}
+	\item Solution form
+	\item PDE $\to$ ODE (always Sturm-Liouville type)
+	\item Solving SL equations and impose boundary conditons
+	\item Linear combination of eigenfunctions
+	\item Using inhomogeneous boundary conditions
+\end{enumerate}
+
+
+\subsection{The Laplacian in shperical polar coordinates}
+
+Spherical polar coordinate: $(r,\theta, \phi)$, $0\leq \theta \leq \pi, 0\leq \phi \leq 2\pi, r>0$
+
+\begin{equation}
+dV=dx dy dz=r^2\sin \theta dr d\theta d\phi
+\end{equation}
+
+The Laplacian operator becomes:
+
+\begin{equation}
+\nabla ^2=\frac{1}{r^2}\frac{\partial}{\partial r}\left(r^2\frac{\partial}{\partial r}\right)+\frac{1}{r^2\sin\theta}\frac{\partial}{\partial \theta}\left(\sin \theta \frac{\partial}{\partial \theta}\right)+\frac{1}{r^2\sin^2\theta}\frac{\partial^2}{\partial \phi^2}
+\end{equation}
+
+
+Now, seeking solution for $\nabla^2\psi(r,\theta)=0$ since we restrict attention to axisymmetric situations thus the final term of Laplacian is omitted.
+
+Using separation of variables by writing $\psi(r,\theta)=R(r)\Theta(\theta)$, we could get two ODEs,
+\begin{align}
+\frac{d}{d\theta}\left(\sin \theta \frac{d\Theta}{d\theta}\right)+\lambda \sin \theta \Theta=0\\
+\frac{d}{dr}\left(r^2\frac{dR}{dr}\right)-\lambda R=0
+\end{align}
+
+Each of equations is of Sturm-Liouville type.
+
+\subsubsection{Legendre polynomials}
+
+We can simplity the angular equation with the substitution $x=\cos(\theta)$
+\begin{equation}
+-\sin\theta \frac{d}{dx}\left[\sin \theta \left(-\sin \theta \frac{d\Theta}{dx}\right)\right]+\lambda \sin \theta \Theta =0
+\end{equation}
+
+which is equivalent to
+\begin{equation}
+\frac{d}{dx}\left[(1-x^2)\frac{\Theta}{dx}\right]=-\lambda \Theta
+\end{equation}
+
+which is known as Legendre's equation. This is a standard SL eigenfunction problem on $\Omega =[-1,1]$, with coefficient functions $p(x)=(1-x^2), q(x)=0, \omega(x)=1$
+
+The self-adjointness of SL operator holds since,
+
+\begin{equation}
+(f,Lg)=(Lf,g)+\underbrace{\left[p(x)(f*'g-f*g')\right]_{-1}^1}_{p(x)=0 \ \textup{at} \ x=\pm 1}
+\end{equation}
+
+Solving legendre's equation with the form $\Theta(x)=\sum_{n=0}^{\infty}a_n x^n$, the recurrence relationhsip is:
+
+\begin{equation}
+a_{n+2}=\left[\frac{n(n+1)-\lambda}{(n+1)(n+2)}\right]
+\end{equation}
+
+Picking $a_0$ and $a_1$ freely,
+
+\begin{equation}
+\Theta(x)=a_0\Theta_0(x)+a_1\Theta(x)
+\end{equation}
+
+where
+
+\begin{align}
+\Theta_0(x)=1+\frac{-\lambda}{2!}x^2+\frac{(-\lambda)(6-\lambda)}{4!}x^4+ \ldots\\
+\Theta_1(x)=x+\frac{2-\lambda}{3!}x^3+\frac{(2-\lambda)(12-\lambda)}{5!}x^5+ \ldots
+\end{align}
+
+However, the series diverges at $x=\pm 1$, violating boundary condition. To avoid this, we could terminate the power series. Thus
+
+\begin{equation}
+\lambda=l(l+1), \textup{for} \  l\in \mathbb{Z}_{\geq 0}
+\end{equation}
+
+
+The polynomial is know as Legendre polynomial, which could be represented as (Rodrigues' formula),
+
+\begin{equation}
+P_l(x)=\frac{1}{2^l l!}\frac{d^l}{dx^l}(x^2-1)^l
+\end{equation}
+
+
+
+Orthogonal property of legendre polynomial,
+\begin{equation}
+\int_{-1}^{1}P_m(x)P_n(x)=\frac{2}{2l+1}\delta_{m,l}
+\end{equation}
+
+
+In summary, the Legendre polynomials are the solutions of Legendre's equation with eigenvalue $\lambda=l(l+1)$ for $l\in \mathbb{Z}_{\geq 0}$
+
+\subsection{Laplace's equation in cylindrical polar coordinates}
+
+Cylindrical polar coordinate: $(r,\theta,z)$. The Laplacian operator becomes:
+\begin{equation}
+\nabla^2=\frac{1}{r}\frac{\partial}{\partial r}\left(r\frac{\partial}{\partial r}\right)+\frac{1}{r^2}\frac{\partial^2}{\partial \theta ^2}+\frac{\partial^2}{\partial z^2}
+\end{equation}
+
+
+Separation of variables by taking form $\psi=R(r)\Theta(\theta)Z(z)$ gives three ODEs,
+\begin{equation}
+\Theta = -\lambda \Theta, Z''=\mu Z, r^2R''+rR'+(\mu r^2-\lambda)R
+\end{equation}
+
+
+
+\subsubsection{Bessel functions}
+
+We solve the radian equation by multiplying this equation through by $r$ and noting that $rR''+R'=(rR')'$. We obtain the SL form,
+
+\begin{equation}
+\frac{d}{dr}\left(r\frac{dR}{dr}\right)-\frac{n^2}{r}R=-\mu r R
+\end{equation}
+
+where $p(r)=r, q(r)=-\lambda_n/r=-n^2/r, \omega(r)=r$, we can eliminate $\mu$ by introducing $x=r\sqrt{\mu}$,
+\begin{equation}
+x^2\frac{d^2R}{dx^2}+x\frac{dR}{dx}+(x^2-n^2)R=0
+\end{equation}
+
+which is known as Bessel's equation of order $n$.
+
+\section{The Heat Equation}
+The equation is,
+\begin{equation}
+\frac{\partial \Phi}{\partial t}=K\nabla^2\Phi
+\end{equation}
+
+
+\subsection{Properties of heat equation}
+The first property is that the total amount of heat is conserved.
+\begin{equation}
+\frac{d}{dt}\left(\int_{\Omega} \Phi dV\right)=\int_{\Omega}\frac{\partial \Phi}{\partial t}dV=K\int_{\Omega} \nabla^2 \Phi dV=K\int_{\Omega} \mathbf{n} \cdot \nabla \Phi dS
+\end{equation}
+
+where $\mathbf{n}$ is the outward normal to the boundary $\partial \Omega$ of the spatial region. In particula, if $\mathbf{n} \cdot \nabla \Phi |_{\Omega}=0$, which says that no heat flows out of our region, then,
+
+\begin{equation}
+\frac{d}{dt}\left(\int_{\Omega} \Phi dV\right)=0
+\end{equation}
+
+
+and the total amount of heat in $\Omega$ is conserved.
+
+
+
+The second property is that if $\Phi(x,t)$ solves the heat equation for $(x,,t) \in \mathbb{R}^n \times [0,\infty]$, then so do the translated function and rescaled function.
+\begin{align}
+\Phi_1(x,t)=\Phi(x-x_0,t-t_0)\\
+\Phi_2(x,t)=A\Phi(\lambda x,\lambda ^2t)
+\end{align}
+
+
+
+Let's try to choose the constant $A$ so that the total amount of heat in the solution $\Phi_2$ is the same as in our original solution $\Phi$. We have
+\begin{equation}
+\int_{\mathbb{R}^n} \Phi_2 d^nx=A\int_{\mathbb{R}^n}\Phi(\lambda x, \lambda^2 t) d^n x=A\lambda ^{-n}\int_{\mathbb{R}^n}\Phi(y,\lambda^2 t)d^n y
+\end{equation}
+wherer $y=\lambda x$. If we choose $A=\lambda ^n$, the the total heat in $\Phi_2$ at time $t$ will be the same as the total heat in $\Phi$ at time $\lambda^2 t$. Since the total heat is conserved, so they are the same at all times. What does the rescaling property tell us? It says that there is nothing really new about the time variable $t$ compared to the spatial variables.
+ In other words, although $\Phi(x,t)$ looks as though it depends on $n$ spatial variables and one time variable, we can always rescale so as to eliminate one of these variables. 
+
+\subsection{The fundamental solution}
+Choosing $\lambda=1/\sqrt{Kt}$, and we consider the solutions of the form with similarity variable,
+\begin{equation}
+\eta=\frac{x}{\sqrt{Kt}}
+\end{equation}
+\begin{equation}
+\Phi(x,t)=\frac{1}{\sqrt{Kt}}F(x/\sqrt{Kt},1)=\frac{1}{\sqrt{Kt}}F(\eta)
+\end{equation}
+
+Therefore, our solution is,
+\begin{equation}
+\Phi(x,t)=G(x,t)=\frac{1}{\sqrt{4\pi Kt}}\exp\left(-\frac{x^2}{4Kt}\right)
+\end{equation}
+
+This class of solution is known as the heat knernel.
+
+
+
+
+
+\subsection{Brownian motion and the existence of atoms}
+
+Let $p(y)$ be the probability that the dust particle moves through a displacement $y$ at each time step, with $\int_{-\infty}^{\infty} p(y)dy=1$. We assume that $p(y)$ is an even function of $y$ so that the mean value $\langle y \rangle$.
+
+Let $P(x,t)$ be the probability density that the dust particle is located at some position $x \in \mathbf{R}$ at time $t$, then we have
+\begin{equation}
+P(x;t+\Delta t)=\int_{-\infty}^{\infty}p(y)P(x-y;t)dy
+\end{equation}
+
+
+\textbf{Physical meaning}: this equation says that the probability of the particle is located at $x$ at time $t+\Delta t$ is the product of the probability it was some amount $y$ away at the previous time interval, times the probability it stepped through exactly $y$, for any choice of $y$. Expanding $P(x-y;t)$ as a Taylor series in $y$ we have,
+\begin{align}
+P(x;t+\Delta t)&=\int_{-\infty}^{\infty}p(y)(P(x;t)-y\frac{\partial P}{\partial x}(x;t)+\frac{1}{2}y^2\frac{\partial ^2 P}{\partial x^2}(x;t)+\ldots)\\
+			   &=\sum_{r=0}^{\infty} \frac{\langle y^r \rangle}{r!} \frac{\partial^r P}{\partial x^r}(x;t)
+\end{align}
+
+
+where $\langle y^r \rangle =\int_{-\infty}^{\infty}y^rp(y)dy$
+
+We have assumed that $\langle y \rangle$=0, and if the motion of the particle is small so that $p(y)$ is concentrated near $y=0$, then $\langle y^r \rangle$  will drop rapidly as $r$ increases. Keeping only the learding non-trivial term we have,
+
+\begin{equation}
+P(x;t+\Delta t)-P(x;t)=\frac{1}{2}\langle y^2 \rangle \frac{\partial^2 P}{\partial x^2}(x;t)
+\end{equation}
+
+As $\Delta t \to 0$, we find that $P(x,t)$ satifies the heat equation,
+
+\begin{equation}
+\frac{\partial P}{\partial t}=K\nabla^2 P
+\end{equation}
+
+where $K=\langle y^2 \rangle /2\Delta t$
+\subsection{Boundary conditions and uniqueness}
+Let $M=\Omega \times [0,T]$ be a compact domain with boundary $\partial \Omega$, we'd like to check the uniqueness of the solution of the heat equation with Dirichlet condition,
+\begin{align}
+&\psi |_{\Omega \times \{0\}}=f(x), (\textup{initial condition})\\
+&\psi |_{\partial \Omega \times [0,T]}=g(x,t), (\textup{boundary condition})
+\end{align}
+
+for some function $f:\Omega \to \mathbb{R}, g: \partial \Omega \times [0,T] \to \mathbb{R}$.
+
+Suppose $\psi_1,\psi_2$ are two solutions of heat equation, obeying the boundary conditions. Then if setting $\delta \psi=\psi_1-\psi_2$, we have,
+\begin{equation}
+0=\int_{\Omega} \delta \psi \left(\frac{\partial \delta \psi}{\partial t}-K\nabla^2 \psi \right) dV
+\end{equation}
+
+Differentiating the intergral with respect to time we have,
+\begin{align}
+\frac{1}{2}\frac{d}{dt}\int_\Omega \delta \psi^2 dV&=\int_{\Omega} \delta \psi \frac{\partial \delta \psi}{\partial t} dV=K\int{\Omega} \delta \psi \nabla ^2 \delta \psi dV\\
+&=-K\int_{\Omega} (\nabla \delta \psi) \cdot (\nabla \delta \psi) dV+\underbrace{K\int_{\Omega} \delta \psi \nabla \delta \psi \cdot}_{=0} dS
+\end{align}
+Therefore, 
+
+\begin{equation}
+\frac{d}{dt} \left(\int_{\Omega} \delta \psi ^2 dV \right) \leq 0
+\end{equation}
+
+The quantity $E(t)=\int_{\Omega} \delta \psi ^2 dV$ is a non-negative function, which can never increase. Since $E(0)=0$ by initial condition, we must have $E(t)=0$ at all times. This is only possible if $\delta \psi=0$ everywhere in $\Omega$ at all times in $t \in [0,T]$. Thus, $\psi_1=\psi_2$ everywhere in $M$.
+
+
+\section{The Wave Equation}
+
+The wave equation is,
+\begin{equation}
+\frac{\partial^2 \phi}{\partial t^2}=c^2 \nabla ^2 \phi
+\end{equation}
+
+with the boundary conditions,
+\begin{equation}
+\phi(0,t)=\phi(L,t)=0
+\end{equation}
+and the intial conditions,
+\begin{equation}
+\phi(x,0)=f(x),\frac{\partial \phi}{\partial t}(x,0)=g(x)
+\end{equation}
+
+
+Using separation of variable, seeking the solution of the form $\phi(x,t)=X(x)T(t)$, and the general solution is,
+\begin{equation}
+\phi(x,t)=\sum_{n=1}^{\infty} \sin \frac{n \pi x}{L}\left[A_n\cos\frac{n\pi ct}{L}+B_n \sin \frac{n\pi ct}{L}\right]
+\end{equation}
+
+where the constants $A_n,B_n$ can by determined by the inhomogenous initial conditions,
+\begin{equation}
+A_n=\frac{2}{L}\int_0^L \sin \frac{n \pi x}{L} f(x) dx, \ B_n=\frac{2}{n \pi c}\int_0^L \sin \frac{n \pi x}{L} g(x) dx
+\end{equation}
+
+\subsection{Energetics and uniqueness}
+
+
 \end{document}

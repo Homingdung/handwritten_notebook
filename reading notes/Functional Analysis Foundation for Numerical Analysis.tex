@@ -26,7 +26,7 @@
 %                 START HERE                  %
 % ------------------------------------------ %
 
-\title{Functional Analysis Foundation for Numerical Analysis} % Replace with appropriate title
+\title{Functional Analysis \\ with a Foundation for Numerical Analysis} % Replace with appropriate title
 \author{Mingdong He\\The University of Nottingham} 
 
 \maketitle
@@ -45,7 +45,7 @@
 \section{Introduction}
 This is my notes based on \textit{Theoretical Numerical Analysis: A Functional Analysis Framework, Kendall Atkinson, Weimin Hall}. 
 \section{Linear Space}
-\subsection{Algebraic Structure of Linear Space}
+\subsection{Linear Space}
 \begin{definition}
 Let $V$ be a set of objects, to be called vectors, $\mathbb{K}$ be a set of scalers, either $\mathbb{R}$ or $\mathbb{C}$. Assume there are two operations: 1. (addition): $(u,v) \to u+v \in V$, 2. (Multiplication) $(\alpha,v) \to \alpha v \in V$, $u,v \in V, \alpha \in \mathbb{K}$, satisfying below rules:
 \begin{enumerate}
@@ -101,9 +101,8 @@ The real plane can be viewed as the Cartesian product of two real lines: $R^2=R\
 \end{lemma}
 
 In next section, we will introduce spaces from topolotical structure, before doing that, we need to define some basic concepts about the measure on the magnitude of the difference between the numerical solution and the exact solution. This measuere is norm.
-\subsection{Topological Structure of Linear Space}
-
-\subsubsection{Normed spaces}
+\subsection{Normed Linear spaces and Banach Spaces}
+\subsubsection{Normed Space}
 \begin{definition}[Norm]
 Given a linear space $V$, a norm $|| \cdot ||$ is a function from $V \to R$ with the following properties.
 \begin{enumerate}
@@ -138,6 +137,180 @@ The function $f$ is said to be continuous on $V$ if it is continuous at every $u
 \begin{proposition}[Norm is continuous]
 The norm function $||\cdot||$ is continuous.
 \end{proposition}
+
+\begin{definition}[Equivalence of norm]
+We say two norms $||\cdot||_{(1)}$ and $||\cdot ||_{(2)}$ are equivalent if there exist positive constants $c_1,c_2$, such that,
+\begin{equation}
+c_1||v||_{(1)}\leq ||v||_{(2)} \leq c_2||v||_{(1)}, \forall v \in V
+\end{equation}
+\end{definition}
+
+With two such equivalent norms, a sequence $\{u_n\}$ converges in one norm iff it converges in the other norm:
+\begin{equation}
+\lim_{n \to \infty} ||u_n-u||_{(1)}=0 \iff \lim_{n\to \infty} ||u_n-u||_{(2)}=0
+\end{equation}
+
+\begin{proposition}
+It is straightforward to show,
+\begin{equation}
+||x||_{\infty}\leq ||x||_p \leq d^{1/p}||x||_{\infty}
+\end{equation}
+\end{proposition}
+So all the norms $||x||_p$, $1\leq p \leq \infty$, on $\mathbb{R}^d$ are equivalent.
+
+
+\begin{theorem}
+Over a finite dimensional space, any two norms are equivalent. 
+\end{theorem}
+Thus, on a finite dimensional space, different norms lead to the same convergence notation. However, over an infinite dimensional space, such a statement is no longer valid.
+
+
+\begin{proposition}
+Consider again the space of all continuous functions on $[0,1]$, and the family of norms $||\cdot||_p, 1\leq p <\infty$, and $||\cdot||_{\infty}$. We have, for any $p \in [1,\infty]$,
+\begin{equation}
+||v||_p \leq ||v||_{\infty}, \forall v \in V
+\end{equation}
+
+Therefore, convergence in $||\cdot||_{\infty} \implies$ convergence in $||\cdot||_{p}, 1\leq p < \infty$, but not conversely. Convergence in $||\cdot||_{\infty}$ is usually called uniform convergence.
+
+\end{proposition}
+
+With the notation of convergence, we can define the concept of an infinite series in a normed space.
+
+\begin{definition}
+Let $\{v_n\}_{n=1}^{\infty}$ be a sequence in a normed space $V$. Define the partial sums $s_n=\sum_{i=1}^{n} v_i,n=1,2,\ldots$. If $s_n \to s$ in $V$, then we say the series $\sum_{i=1}^{\infty}$ converges, and write
+\begin{equation}
+\sum_{i=1}^{\infty} v_i=\lim_{n\to \infty} s_n=s
+\end{equation}
+\end{definition}
+
+\begin{definition}[Dense]
+Let $V_1 \subset V_2$ be two subsets in a normed spaces $V$. We say the set $V_1$ is dense in $V_2$ if for any $u \in V_2$ and any $\epsilon >0$, there is a $v\in V_1$ such that $||v-u||<\epsilon$.
+\end{definition}
+In other words, any point in $V_2$ has points in $V_1$ arbitraily close.
+
+\subsubsection{Banach Space}
+There is one special type of normed space called Banach space.
+
+\begin{definition}[Cauchy sequence]
+Let $V$ be a normed space. A sequence $\{u_n\} \subset V$ is called Cauchy sequence if
+\begin{equation}
+\lim_{m,n \to \infty}||u_m-u_n||=0
+\end{equation}
+\end{definition}
+
+Covergent sequence $\implies$ Cauchy sequence. In the finite dimensional space $\mathbb{R}^d$, any Cauchy sequence is convergent. However, in a general infinite dimensional space, a Cauchy sequence may fail to converge.
+
+Although a Cauchy sequence may not be convergent, it does convergent if it has a convergent subsequence.
+
+\begin{proposition}
+If a Cauchy sequence contains a convergent subsequence, then the entire sequence converges to the same limit.
+\end{proposition}
+\begin{proof}
+Let $\{u_n\}$ be a Cauchy sequence in a normed space $V$, with a subsequence $\{u_{n_j}\}$ converging to $u\in V$. THen for any $\epsilon >0$, there exists positive integers $n_0$ and $j_0$ such that
+\begin{align}
+&||u_m-u_n||\leq \frac{\epsilon}{2}, \forall m,n \geq n_0\\
+&||u_{n_j}-u||\leq \frac{\epsilon}{2}, \forall j \geq j_0
+\end{align}
+
+Let $N=\max\{n_0,n_{j_0}\}$. Then
+\begin{equation}
+||u_n-u||\leq ||u_n-u_N||+||u_N-u||\leq \epsilon, \forall n \geq N
+\end{equation}
+Therefore, $u_n \to u$ as $n\to \infty$.
+\end{proof}
+
+
+\begin{definition}[Completeness]
+A noremd space is said to be complete if every Cauchy sequence from the space converges to an element in the space.
+\end{definition}
+
+\begin{definition}[Banach space]
+A complete normed space is called a Banach space.
+
+\end{definition}
+
+Overall, Normed space $+$ Completeness $\implies$ Banach space.
+
+
+\section{Lebesgue Measure and Lebesgue Integration}
+
+
+\textit{"I have to pay a certain sum, which I have collected in my pocket. I take the bills and coins out of my pocket and give them to the creditor in the order I find them until I have reached the total sum. This is the Riemann integral. But I can proceed differently. After I have taken all the money out of my pocket I order the bills and coins according to identical values and then I pay the several heaps one after the other to the creditor. This is my integral."} - Henri Lebesgue \\
+
+\subsection{Motivations}
+The Lebesgue integral is a type of integral which is more general and more flexiable than the Riemann integral. We now know that $(C[a,b], ||\cdot||_{\infty})$ is complete while $C([a,b],||\cdot||_1)$ is not. By using Lebesgue integral, we will see that 
+\begin{enumerate}
+	\item The completion of $(C[a,b], ||\cdot||_{\infty})$ is $L^1[a,b]$ which is a Banach space.
+	\item The completion of $(C[a,b],||\cdot||_1)$ is $L^2[a,b]$ which is a Hilbert space. 
+\end{enumerate}
+
+
+\noindent \textbf{Riemann integral:} Consider partition $P$ and Riemann lower sums $L(f,P)=\sum (x_{k+1}-x_k)m_k$ with $m_k=\inf_{[x_k,x_{k+1}]}f(x)$. Then we use the `sup' of $L(f,P)$ over all parititions to obtain lower integral. \\
+\textbf{Lebesgue integral:} Suppose $0\leq f \leq 1$. Consider partitions of according to the values of $f$ over the set $E_{k/n}=f^{-1}([(k-1)/n,k/n])=\{x\in \mathbb{R}:(k-1)/n<f(x)\leq k/n\}$, and consider the sum $\sum_{k=1}^n \frac{k-1}{n} m(E_{k/n})$ where $m(E_{k/n})$ is the length of $E_{k/n}$, which called Lebesgue measure. When $n\to \infty$, we have $\sum_{k=1}^n \frac{k-1}{n} m(E_{k/n})\to \int_a^bf(x)dx$.
+
+Also for a bounded function $f: [a,b]\to \mathbb{R}$, Riemann integral $\implies$ Lebesgue integral.
+
+\subsection{Lebesgue Measure}
+
+The Lebesgue measure is a generalisation of the notation of `length', `area', and `volume' to more general sets.
+\begin{definition}[Open interval]
+We define an open interval in $\mathbb{R}$ as $I=(a,b),a<b,a,b \in \mathbb{R}$; In $\mathbb{R}^2$, we call the open rectangle domain $I=(a_1,b_1)\times(a_2,b_2)$. In $\mathbb{R}^d$, an open interval is given by $I=\prod_{i=1}^n(a_i,b_i)$.
+\end{definition}
+\begin{definition}[Length of an open interval]
+Length of an open interval is defined as $|I|=\prod_{i=1}^n(a_i,b_i)$
+\end{definition}
+
+For example, 
+
+\begin{enumerate}
+	\item $I=(a,b), |I|=b-a$.
+	\item $I=(a_1,b_1)\times(a_2,b_2) \subseteq \mathbb{R}^2, |I|=(b_1-a-1)(b_2-a_2)$.
+\end{enumerate}
+
+
+\begin{definition}[At most countable]
+We say that $A$ is at most countable if either $A$ is finite set or it contains countably many elements.
+\end{definition}
+
+\begin{definition}[Covering by open intervals]
+Let $E \subseteq \mathbb{R}^d$ be a set. A collection $U:=\{I_\alpha: \alpha \in A\}$ fo open intervals is called an open covering of $E$ if $E \subseteq \cup_{\alpha \in A}I_\alpha$.
+\end{definition}
+
+\begin{definition}[Countable covering by open intervals (CCOI)]
+If $U$ is an open covering of $E$ consisting at most countable many elements, that is, $U=\{I_k\}_k$ with $k=1,2,\ldots,n$, or $k\in \mathbb{N}$.
+\end{definition}
+
+We call $\sum_k |I_k|$ the total length of the countable open covering $U$.
+
+\begin{definition}[Outer measure]
+Suppose $E \subseteq \mathbb{R}^d$ is a set. Let $M_E$ be the collection of all CCOI's of $E$. The outer measure of $E$ is defined by
+\begin{equation}
+m^{*}(E)=\inf\{\sum_k |I_k|:\{I_k\} \in M_E\}
+\end{equation}
+\end{definition}
+
+Let's list some properties of Lebesgue outer measure.
+\begin{proposition}
+Let $E\subseteq \mathbb{R}^d$, $A,B \subseteq \mathbb{R}^d$ and $A_k \subseteq \mathbb{R}^d$ with $k\in \mathbb{N}$, then
+\begin{enumerate}
+	\item $m^{*}(E) \geq 0$. When  $E= \emptyset$, we have $m^{*}(E)=0$.
+	\item $A\subseteq B$ $\implies$ $m^{*}(A) \leq m^{*}(B)$
+	\item $m^{*}(\cup_{k=1}^{\infty}A_k) \leq \sum_{k=1}^{\infty}m^{*}(A_k)$
+	\item If $disc(A,B)>0$, then $m^{*}(A\cup B)=m^{*}(A)+m^{*}(B)$
+
+\end{enumerate}
+
+\end{proposition}
+
+
+
+
+
+
+
+\section{Inner Product and Hilbert Spaces}
+
 
 
 \end{document}

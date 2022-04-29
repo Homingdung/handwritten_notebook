@@ -2,8 +2,8 @@ PWD /Users/peter/handwritten_notebook/reading notes
 INPUT /Users/peter/Library/TinyTeX/texmf.cnf
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/web2c/texmf.cnf
 INPUT /Users/peter/Library/TinyTeX/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT Mathematical Method.tex
-OUTPUT Mathematical Method.log
+INPUT Functional Analysis Foundation for Numerical Analysis.tex
+OUTPUT Functional Analysis Foundation for Numerical Analysis.log
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/tex/latex/base/article.cls
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/tex/latex/base/article.cls
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/tex/latex/base/article.cls
@@ -432,10 +432,10 @@ INPUT /Users/peter/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdft
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-INPUT ./Mathematical Method.aux
-INPUT Mathematical Method.aux
-INPUT Mathematical Method.aux
-OUTPUT Mathematical Method.aux
+INPUT ./Functional Analysis Foundation for Numerical Analysis.aux
+INPUT Functional Analysis Foundation for Numerical Analysis.aux
+INPUT Functional Analysis Foundation for Numerical Analysis.aux
+OUTPUT Functional Analysis Foundation for Numerical Analysis.aux
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
@@ -473,18 +473,18 @@ INPUT /Users/peter/Library/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitl
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
-INPUT ./Mathematical Method.out
-INPUT Mathematical Method.out
-INPUT ./Mathematical Method.out
-INPUT Mathematical Method.out
-INPUT ./Mathematical Method.out
-INPUT Mathematical Method.out
-INPUT ./Mathematical Method.out
-INPUT Mathematical Method.out
-OUTPUT Mathematical Method.pdf
-INPUT ./Mathematical Method.out
-INPUT ./Mathematical Method.out
-OUTPUT Mathematical Method.out
+INPUT ./Functional Analysis Foundation for Numerical Analysis.out
+INPUT Functional Analysis Foundation for Numerical Analysis.out
+INPUT ./Functional Analysis Foundation for Numerical Analysis.out
+INPUT Functional Analysis Foundation for Numerical Analysis.out
+INPUT ./Functional Analysis Foundation for Numerical Analysis.out
+INPUT Functional Analysis Foundation for Numerical Analysis.out
+INPUT ./Functional Analysis Foundation for Numerical Analysis.out
+INPUT Functional Analysis Foundation for Numerical Analysis.out
+OUTPUT Functional Analysis Foundation for Numerical Analysis.pdf
+INPUT ./Functional Analysis Foundation for Numerical Analysis.out
+INPUT ./Functional Analysis Foundation for Numerical Analysis.out
+OUTPUT Functional Analysis Foundation for Numerical Analysis.out
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
@@ -514,9 +514,9 @@ INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symbols/
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
-INPUT ./Mathematical Method.toc
-INPUT Mathematical Method.toc
-INPUT Mathematical Method.toc
+INPUT ./Functional Analysis Foundation for Numerical Analysis.toc
+INPUT Functional Analysis Foundation for Numerical Analysis.toc
+INPUT Functional Analysis Foundation for Numerical Analysis.toc
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
@@ -526,20 +526,16 @@ INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symbols/
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
-OUTPUT Mathematical Method.toc
+OUTPUT Functional Analysis Foundation for Numerical Analysis.toc
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
-INPUT /Users/peter/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
-INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/tfm/public/cm/cmbx7.tfm
-INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/tfm/public/cm/cmbx5.tfm
-INPUT Mathematical Method.aux
-INPUT ./Mathematical Method.out
-INPUT ./Mathematical Method.out
+INPUT /Users/peter/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT Functional Analysis Foundation for Numerical Analysis.aux
+INPUT ./Functional Analysis Foundation for Numerical Analysis.out
+INPUT ./Functional Analysis Foundation for Numerical Analysis.out
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
-INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
-INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb
@@ -549,8 +545,6 @@ INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
-INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb
 INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
-INPUT /Users/peter/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb
